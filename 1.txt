@@ -1,0 +1,83 @@
+C:\Users\latys\docker>docker pull busybox
+Using default tag: latest
+latest: Pulling from library/busybox
+325d69979d33: Pull complete
+Digest: sha256:560af6915bfc8d7630e50e212e08242d37b63bd5c1ccf9bd4acccf116e262d5b
+Status: Downloaded newer image for busybox:latest
+docker.io/library/busybox:latest
+
+C:\Users\latys\docker>docker run --name pinger -i -t busybox ping -c 7 netology.ru
+PING netology.ru (104.22.40.171): 56 data bytes
+64 bytes from 104.22.40.171: seq=0 ttl=62 time=17.419 ms
+64 bytes from 104.22.40.171: seq=1 ttl=62 time=13.364 ms
+64 bytes from 104.22.40.171: seq=2 ttl=62 time=14.610 ms
+64 bytes from 104.22.40.171: seq=3 ttl=62 time=17.844 ms
+64 bytes from 104.22.40.171: seq=4 ttl=62 time=16.519 ms
+64 bytes from 104.22.40.171: seq=5 ttl=62 time=14.191 ms
+64 bytes from 104.22.40.171: seq=6 ttl=62 time=13.922 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 13.364/15.409/17.844 ms
+
+C:\Users\latys\docker>docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS                          PORTS     NAMES
+183c8ba5b796   busybox   "ping -c 7 netology.…"   About a minute ago   Exited (0) About a minute ago             pinger
+
+C:\Users\latys\docker>docker logs pinger
+PING netology.ru (104.22.40.171): 56 data bytes
+64 bytes from 104.22.40.171: seq=0 ttl=62 time=17.419 ms
+64 bytes from 104.22.40.171: seq=1 ttl=62 time=13.364 ms
+64 bytes from 104.22.40.171: seq=2 ttl=62 time=14.610 ms
+64 bytes from 104.22.40.171: seq=3 ttl=62 time=17.844 ms
+64 bytes from 104.22.40.171: seq=4 ttl=62 time=16.519 ms
+64 bytes from 104.22.40.171: seq=5 ttl=62 time=14.191 ms
+64 bytes from 104.22.40.171: seq=6 ttl=62 time=13.922 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 13.364/15.409/17.844 ms
+
+C:\Users\latys\docker>docker start pinger
+pinger
+
+C:\Users\latys\docker>docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS                      PORTS     NAMES
+183c8ba5b796   busybox   "ping -c 7 netology.…"   5 minutes ago   Exited (0) 36 seconds ago             pinger
+
+C:\Users\latys\docker>docker logs -f -t pinger
+2023-06-09T12:59:18.785306035Z PING netology.ru (104.22.40.171): 56 data bytes
+2023-06-09T12:59:18.803033733Z 64 bytes from 104.22.40.171: seq=0 ttl=62 time=17.419 ms
+2023-06-09T12:59:19.799184005Z 64 bytes from 104.22.40.171: seq=1 ttl=62 time=13.364 ms
+2023-06-09T12:59:20.800875107Z 64 bytes from 104.22.40.171: seq=2 ttl=62 time=14.610 ms
+2023-06-09T12:59:21.804330130Z 64 bytes from 104.22.40.171: seq=3 ttl=62 time=17.844 ms
+2023-06-09T12:59:22.803348917Z 64 bytes from 104.22.40.171: seq=4 ttl=62 time=16.519 ms
+2023-06-09T12:59:23.801496311Z 64 bytes from 104.22.40.171: seq=5 ttl=62 time=14.191 ms
+2023-06-09T12:59:24.801315840Z 64 bytes from 104.22.40.171: seq=6 ttl=62 time=13.922 ms
+2023-06-09T12:59:24.801358602Z
+2023-06-09T12:59:24.801366497Z --- netology.ru ping statistics ---
+2023-06-09T12:59:24.801370895Z 7 packets transmitted, 7 packets received, 0% packet loss
+2023-06-09T12:59:24.801374241Z round-trip min/avg/max = 13.364/15.409/17.844 ms
+2023-06-09T13:03:44.795609994Z PING netology.ru (104.22.40.171): 56 data bytes
+2023-06-09T13:03:44.807647633Z 64 bytes from 104.22.40.171: seq=0 ttl=62 time=11.978 ms
+2023-06-09T13:03:45.817155303Z 64 bytes from 104.22.40.171: seq=1 ttl=62 time=20.935 ms
+2023-06-09T13:03:46.814656924Z 64 bytes from 104.22.40.171: seq=2 ttl=62 time=18.106 ms
+2023-06-09T13:03:47.810580123Z 64 bytes from 104.22.40.171: seq=3 ttl=62 time=13.258 ms
+2023-06-09T13:03:48.815165243Z 64 bytes from 104.22.40.171: seq=4 ttl=62 time=17.438 ms
+2023-06-09T13:03:49.815331199Z 64 bytes from 104.22.40.171: seq=5 ttl=62 time=17.424 ms
+2023-06-09T13:03:50.812345630Z 64 bytes from 104.22.40.171: seq=6 ttl=62 time=13.983 ms
+2023-06-09T13:03:50.812395976Z
+2023-06-09T13:03:50.812400324Z --- netology.ru ping statistics ---
+2023-06-09T13:03:50.812403551Z 7 packets transmitted, 7 packets received, 0% packet loss
+2023-06-09T13:03:50.812406376Z round-trip min/avg/max = 11.978/16.160/20.935 ms
+
+C:\Users\latys\docker>docker rm pinger
+pinger
+
+C:\Users\latys\docker>docker rmi busybox
+Untagged: busybox:latest
+Untagged: busybox@sha256:560af6915bfc8d7630e50e212e08242d37b63bd5c1ccf9bd4acccf116e262d5b
+Deleted: sha256:8135583d97feb82398909c9c97607159e6db2c4ca2c885c0b8f590ee0f9fe90d
+Deleted: sha256:9547b4c33213e630a0ca602a989ecc094e042146ae8afa502e1e65af6473db03
+
+C:\Users\latys\docker>
